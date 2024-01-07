@@ -6,22 +6,24 @@ public class Main {
         int n = sc.nextInt();
         int[] num = new int[n];
         int result = 0;
+
         for (int i = 0; i < num.length; i++) {
             num[i] = sc.nextInt();
-            if (num[i] == 1)
-                continue;
-            if (num[i] == 2) {
+            if (isPrime(num[i]))
                 result++;
-                continue;
-            }
-            for (int j = 2; j < num[i]; j++) {
-                if (num[i] % j != 0) {
-                    if (num[i] == j + 1)
-                        result++;
-                } else
-                    break;
-            }
         }
         System.out.println(result);
+    }
+
+    public static boolean isPrime(int n) {
+        if (n < 2) {
+            return false;
+        }
+        for (int i = 2; i <= Math.sqrt(n); i++) {
+            if (n % i == 0) {
+                return false;
+            }
+        }
+        return true;
     }
 }
