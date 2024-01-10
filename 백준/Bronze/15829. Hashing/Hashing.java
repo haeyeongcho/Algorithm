@@ -1,22 +1,19 @@
 import java.io.*;
+import java.math.BigInteger;
 
 public class Main {
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
-        int length = Integer.parseInt(br.readLine());
-        String str = br.readLine();
-        char[] ch = new char[length];
-        ch = str.toCharArray();
 
-        int r = 31;
-        int M = 1234567891;
-        int result = 0;
-        for (int i = 0; i < ch.length; i++) {
-            int num = (((int) ch[i] - 96)) * ((int) (Math.pow(r, i)));
-            result += num;
+        int L = Integer.parseInt(br.readLine());
+        String str = br.readLine();
+        BigInteger result = new BigInteger("0");
+
+        for (int i = 0; i < L; i++) {
+            result = result.add(BigInteger.valueOf(str.charAt(i) - 96).multiply(BigInteger.valueOf(31).pow(i)));
         }
-        bw.write(Integer.toString(result % M));
+        bw.write(String.valueOf(result.remainder(BigInteger.valueOf(1234567891))));
 
         bw.flush();
         bw.close();
