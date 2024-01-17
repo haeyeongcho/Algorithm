@@ -1,7 +1,25 @@
 import java.io.*;
+import java.util.Arrays;
 import java.util.StringTokenizer;
 
 public class Main {
+    public static int binarySearch(int[] arr, int key) {
+        int lo = 0;
+        int hi = arr.length - 1;
+
+        while (lo <= hi) {
+            int mid = (lo + hi) / 2;
+            if (key < arr[mid]) {
+                hi = mid - 1;
+            } else if (key > arr[mid]) {
+                lo = mid + 1;
+            } else {
+                return mid;
+            }
+        }
+        return -1;
+    }
+
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
@@ -13,6 +31,8 @@ public class Main {
             N_arr[i] = Integer.parseInt(st.nextToken());
         }
 
+        Arrays.sort(N_arr);
+
         int M = Integer.parseInt(br.readLine());
         int[] M_arr = new int[M];
         st = new StringTokenizer(br.readLine());
@@ -20,25 +40,15 @@ public class Main {
             M_arr[i] = Integer.parseInt(st.nextToken());
         }
 
-        int flag = 0;
-
         for (int i = 0; i < M; i++) {
-            for (int j = 0; j < N; j++) {
-                if (M_arr[i] == N_arr[j]) {
-                    flag = 1;
-                    break;
-                }
-            }
-            if (flag == 1) {
+            if (binarySearch(N_arr, M_arr[i]) >= 0) {
                 bw.write(Integer.toString(1));
                 bw.newLine();
             } else {
                 bw.write(Integer.toString(0));
                 bw.newLine();
             }
-            flag = 0;
         }
-
         bw.flush();
         bw.close();
         br.close();
