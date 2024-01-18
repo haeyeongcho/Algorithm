@@ -18,10 +18,9 @@ public class Main {
                 basket[j] = ballNum;
             }
         }
-        for (int i = 0; i < basket.length - 1; i++) {
+        for (int i = 0; i < basket.length; i++) {
             bw.write(basket[i] + " ");
         }
-        bw.write(Integer.toString(basket[basket.length - 1]));
         bw.flush();
         bw.close();
         br.close();
